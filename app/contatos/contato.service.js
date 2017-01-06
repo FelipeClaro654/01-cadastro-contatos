@@ -9,23 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var contato_service_1 = require("./contato.service");
-var ContatosListaComponent = (function () {
-    function ContatosListaComponent(contatoService) {
-        this.contatoService = contatoService;
+var contatos_mock_1 = require("./contatos-mock");
+var ContatoService = (function () {
+    function ContatoService() {
     }
-    ContatosListaComponent.prototype.ngOnInit = function () {
-        this.contatos = this.contatoService.getContatos();
+    ContatoService.prototype.getContatos = function () {
+        return contatos_mock_1.CONTATOS;
     };
-    return ContatosListaComponent;
+    return ContatoService;
 }());
-ContatosListaComponent = __decorate([
-    core_1.Component({
-        moduleId: module.id,
-        selector: "contatos-lista",
-        templateUrl: "contatos-lista.component.html"
-    }),
-    __metadata("design:paramtypes", [contato_service_1.ContatoService])
-], ContatosListaComponent);
-exports.ContatosListaComponent = ContatosListaComponent;
-//# sourceMappingURL=contatos-lista.component.js.map
+ContatoService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], ContatoService);
+exports.ContatoService = ContatoService;
+//# sourceMappingURL=contato.service.js.map

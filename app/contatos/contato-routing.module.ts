@@ -12,6 +12,10 @@ const contatoRoutes: Routes = [
     {
         path: "contato/save",
         component: ContatoDetalheComponent
+    },
+    {
+        path: "contato/save/:id",
+        component: ContatoDetalheComponent
     }
 ];
 
