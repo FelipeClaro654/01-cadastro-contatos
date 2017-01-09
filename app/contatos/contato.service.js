@@ -14,7 +14,33 @@ var ContatoService = (function () {
     function ContatoService() {
     }
     ContatoService.prototype.getContatos = function () {
-        return contatos_mock_1.CONTATOS;
+        return Promise.resolve(contatos_mock_1.CONTATOS);
+    };
+    ContatoService.prototype.getContato = function (id) {
+        return this.getContatos()
+            .then(function (contatos) { return contatos.find(function (contato) { return contato.id === id; }); });
+    };
+    ContatoService.prototype.getContatosSlowly = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            setTimeout(resolve, 2000);
+        })
+            .then(function () {
+            console.log("Primeiro then");
+            return "Curso Angular 2";
+        })
+            .then(function (param) {
+            return new Promise(function (resolve2, reject2) {
+                setTimeout(function () {
+                    console.log("Continuando após 4s");
+                    resolve2();
+                }, 2000);
+            });
+        })
+            .then(function () {
+            console.log("terceiro then");
+            return _this.getContatos();
+        });
     };
     return ContatoService;
 }());

@@ -9,9 +9,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
+var contato_service_1 = require("./contato.service");
+var contato_model_1 = require("./contato.model");
 var ContatoDetalheComponent = (function () {
-    function ContatoDetalheComponent() {
+    function ContatoDetalheComponent(contatoService, route, location) {
+        this.contatoService = contatoService;
+        this.route = route;
+        this.location = location;
+        this.isNew = true;
     }
+    ContatoDetalheComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log("on init");
+        this.contato = new contato_model_1.Contato(0, "", "", "");
+        this.route.params.forEach(function (params) {
+            var id = +params["id"];
+            if (id) {
+                _this.isNew = false;
+                _this.contatoService.getContato(id)
+                    .then(function (contato) {
+                    _this.contato = contato;
+                });
+            }
+        });
+    };
+    ContatoDetalheComponent.prototype.getFormGroupClass = function (isValid, isPristine) {
+        return {
+            'form-group': true,
+            'has-danger': !isValid && !isPristine,
+            'has-success': isValid && !isPristine
+        };
+    };
+    ContatoDetalheComponent.prototype.getFormControlClass = function (isValid, isPristine) {
+        return {
+            'form-control': true,
+            'form-control-danger': !isValid && !isPristine,
+            'form-control-success': isValid && !isPristine
+        };
+    };
+    ContatoDetalheComponent.prototype.onSubmit = function () {
+        if (this.isNew) {
+            console.log("cadastra contato");
+        }
+        else {
+            console.log("altera contato");
+        }
+    };
     return ContatoDetalheComponent;
 }());
 ContatoDetalheComponent = __decorate([
@@ -20,7 +65,9 @@ ContatoDetalheComponent = __decorate([
         selector: "contato-detalhe",
         templateUrl: "contato-detalhe.component.html"
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [contato_service_1.ContatoService,
+        router_1.ActivatedRoute,
+        common_1.Location])
 ], ContatoDetalheComponent);
 exports.ContatoDetalheComponent = ContatoDetalheComponent;
 //# sourceMappingURL=contato-detalhe.component.js.map

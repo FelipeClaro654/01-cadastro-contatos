@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var contato_detalhe_component_1 = require("./contato-detalhe.component");
 var contatos_lista_component_1 = require("./contatos-lista.component");
 var contato_routing_module_1 = require("./contato-routing.module");
@@ -23,7 +24,8 @@ ContatosModule = __decorate([
     core_1.NgModule({
         imports: [
             common_1.CommonModule,
-            contato_routing_module_1.ContatoRoutingModule
+            contato_routing_module_1.ContatoRoutingModule,
+            forms_1.FormsModule
         ],
         declarations: [
             contatos_lista_component_1.ContatosListaComponent,
