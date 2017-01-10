@@ -9,12 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var contatos_mock_1 = require("./contatos-mock");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/toPromise");
 var ContatoService = (function () {
-    function ContatoService() {
+    function ContatoService(http) {
+        this.http = http;
+        this.contatosUrl = "app/contatos";
     }
     ContatoService.prototype.getContatos = function () {
-        return Promise.resolve(contatos_mock_1.CONTATOS);
+        return this.http.get(this.contatosUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; });
     };
     ContatoService.prototype.getContato = function (id) {
         return this.getContatos()
@@ -46,7 +51,7 @@ var ContatoService = (function () {
 }());
 ContatoService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [http_1.Http])
 ], ContatoService);
 exports.ContatoService = ContatoService;
 //# sourceMappingURL=contato.service.js.map
