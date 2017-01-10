@@ -50,12 +50,20 @@ var ContatoDetalheComponent = (function () {
         };
     };
     ContatoDetalheComponent.prototype.onSubmit = function () {
+        var _this = this;
+        var promise;
         if (this.isNew) {
             console.log("cadastra contato");
+            promise = this.contatoService.create(this.contato);
         }
         else {
             console.log("altera contato");
+            promise = this.contatoService.update(this.contato);
         }
+        promise.then(function (contato) { return _this.goBack(); });
+    };
+    ContatoDetalheComponent.prototype.goBack = function () {
+        this.location.back();
     };
     return ContatoDetalheComponent;
 }());
