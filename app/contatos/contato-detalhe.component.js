@@ -28,7 +28,7 @@ var ContatoDetalheComponent = (function () {
             var id = +params["id"];
             if (id) {
                 _this.isNew = false;
-                _this.contatoService.getContato(id)
+                _this.contatoService.find(id)
                     .then(function (contato) {
                     _this.contato = contato;
                 });

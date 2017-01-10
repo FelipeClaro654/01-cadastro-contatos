@@ -12,6 +12,9 @@ var core_1 = require("@angular/core");
 var AppComponent = (function () {
     function AppComponent() {
     }
+    AppComponent.prototype.log = function (param) {
+        console.log(param);
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([

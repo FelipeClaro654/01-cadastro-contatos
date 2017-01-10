@@ -17,14 +17,14 @@ var ContatoService = (function () {
         this.contatosUrl = "app/contatos";
         this.headers = new http_1.Headers({ "Content-Type": "application/json" });
     }
-    ContatoService.prototype.getContatos = function () {
+    ContatoService.prototype.findAll = function () {
         return this.http.get(this.contatosUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    ContatoService.prototype.getContato = function (id) {
-        return this.getContatos()
+    ContatoService.prototype.find = function (id) {
+        return this.findAll()
             .then(function (contatos) { return contatos.find(function (contato) { return contato.id === id; }); });
     };
     ContatoService.prototype.create = function (contato) {
@@ -73,7 +73,7 @@ var ContatoService = (function () {
         })
             .then(function () {
             console.log("terceiro then");
-            return _this.getContatos();
+            return _this.findAll();
         });
     };
     ContatoService.prototype.search = function (term) {
